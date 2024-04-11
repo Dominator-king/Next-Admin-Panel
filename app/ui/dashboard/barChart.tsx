@@ -23,8 +23,8 @@ ChartJS.register(
   Legend,
 );
 
-export default function BarChart({ rev }: { rev: Revenue[] }) {
-  const [revenue, setRevenue] = useState(rev);
+export default function BarChart({ revenue }: { revenue: Revenue[] }) {
+  console.log(revenue);
   return (
     <Bar
       data={{
