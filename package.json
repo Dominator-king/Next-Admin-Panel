@@ -1,11 +1,13 @@
 {
   "private": true,
   "scripts": {
+    "lint": "next lint",
     "build": "next build",
     "dev": "next dev",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "start": "next start"
+    "start": "next start",
+    "seed": "node -r dotenv/config ./scripts/seed.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -14,13 +16,16 @@
     "@vercel/postgres": "^0.5.0",
     "autoprefixer": "10.4.15",
     "bcrypt": "^5.1.1",
+    "chart.js": "^4.4.2",
     "clsx": "^2.0.0",
     "next": "^14.0.2",
     "postcss": "8.4.31",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2",
+    "use-debounce": "^10.0.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {
