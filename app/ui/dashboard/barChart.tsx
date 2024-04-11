@@ -24,7 +24,6 @@ ChartJS.register(
 );
 
 export default function BarChart({ revenue }: { revenue: Revenue[] }) {
-  console.log(revenue);
   return (
     <Bar
       data={{

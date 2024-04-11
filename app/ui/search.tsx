@@ -11,7 +11,6 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const handleChange = useDebouncedCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
-      console.log(value);
       const params = new URLSearchParams(searchParams);
       if (value) {
         params.set('query', value);

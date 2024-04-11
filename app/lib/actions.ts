@@ -19,6 +19,7 @@ const FormSchema = z.object({
   date: z.string(),
 });
 export type State = {
+  id?: string;
   errors?: {
     customerId?: string[];
     amount?: string[];
@@ -52,9 +53,18 @@ export async function CreateInvoice(prevState: State, formData: FormData) {
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
-export async function UpdateInvoice(id: string, formData: FormData) {
+export async function UpdateInvoice(prevState: State, formData: FormData) {
+  const id = prevState.id;
   const rawData = Object.fromEntries(formData.entries());
-  const { customerId, amount, status } = updateInvoice.parse({ ...rawData });
+  // const { customerId, amount, status } = updateInvoice.parse({ ...rawData });
+  const validatedData = updateInvoice.safeParse({ ...rawData });
+  if (!validatedData.success) {
+    return {
+      errors: validatedData.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to update invoice',
+    };
+  }
+  const { amount, customerId, status } = validatedData.data;
   const amountInCents = amount * 100;
 
   try {
