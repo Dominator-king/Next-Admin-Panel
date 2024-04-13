@@ -19,8 +19,8 @@ export default function Page() {
             <a href="https://nextjs.org/learn/" className="text-blue-500">
               Next.js Learn Course
             </a>
-            , brought to you by Vercel. Made By Rayyan to create A test Admin
-            Panel for my company
+            , brought to you by Vercel. Made By Rayyan to Create A Test Admin
+            Panel For His Company
           </p>
           <Link
             href="/login"
