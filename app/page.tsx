@@ -15,12 +15,14 @@ export default function Page() {
           <p
             className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
           >
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
+            <strong>Welcome to Acme.</strong> This is a demo project made by
+            <a
+              href="https://www.linkedin.com/in/rayyan-naeem-muzaffar?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BU5xHQ%2Bb7Q3irZuTM84VOwQ%3D%3D"
+              className="text-blue-500"
+            >
+              Rayyan Naeem Muzaffar
             </a>
-            , brought to you by Vercel. Made By Rayyan to Create A Test Admin
-            Panel For His Company
+            , To Create A Test Admin Panel For His Company
           </p>
           <Link
             href="/login"
