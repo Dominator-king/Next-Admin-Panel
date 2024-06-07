@@ -9,12 +9,16 @@ import {
   LatestInvoicesSkeleton,
   RevenueChartSkeleton,
 } from '@/app/ui/skeletons';
+import { auth } from '@/auth';
 
 export default async function Page() {
+  const session = await auth();
+
   return (
     <main className="h-full w-full">
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
         Dashboard
+        <p className=" ml-4 text-sm text-blue-600">{`Hi ${session?.user?.name}`}</p>
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Suspense fallback={<CardSkeleton />}>

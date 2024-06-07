@@ -1,5 +1,5 @@
 'use server';
-
+import bcrypt from 'bcrypt';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { sql } from '@vercel/postgres';
@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 import { z } from 'zod';
+import { randomUUID } from 'crypto';
 const FormSchema = z.object({
   id: z.string(),
   customerId: z.string({ invalid_type_error: 'Please select a customer.' }),
@@ -103,4 +104,33 @@ export async function authenticate(
     }
     throw error;
   }
+}
+export async function RegisterUser(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  const rawData = Object.fromEntries(formData.entries());
+  const validatedFields = z
+    .object({
+      name: z.string().max(20),
+      email: z.string().email(),
+      password: z.string().min(6),
+    })
+    .safeParse({ ...rawData });
+
+  if (validatedFields.success) {
+    const { name, email, password } = validatedFields.data;
+    const id = randomUUID();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+      await sql`INSERT INTO users (id, name, email, password)
+        VALUES (${id}, ${name}, ${email}, ${hashedPassword})
+        ON CONFLICT (id) DO NOTHING;
+      `;
+    } catch (error) {
+      return 'Database Error: Failed to register user.';
+    }
+    redirect('/login');
+  }
+  return 'Invalid Fields. Failed to register user.';
 }
